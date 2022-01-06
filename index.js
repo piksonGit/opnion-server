@@ -2,11 +2,11 @@ const Koa = require('koa')
 const app = new Koa()
 const cors = require('koa2-cors');
 var Router = require('koa-router');
-
+const user = require("./router/user")
 var router = new Router();
 
 
-let user = 
+let userinfo = 
 {
         username: "小蓝帽",
         userid: "1",
@@ -29,9 +29,7 @@ let user =
     };
 
 app.use(cors());
-router.get('/user', (ctx, next) => {
-  ctx.body = user
-})
+router.use("/user",user.routes(),user.allowedMethods())
 let questions = [{
   name: "我们的宇宙是真实的吗？",
   image: "",
