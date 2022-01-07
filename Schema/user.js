@@ -1,19 +1,19 @@
-const Mongoose  = require("mongoose");
+const mongoose  = require("mongoose");
 
-
-const userSchema = new Mongoose.Schema({
-    username:String,
-    userid:Number,
+const {Schema} = mongoose 
+const userSchema = new Schema({
+    username:{type:String,default:"bokeh"},
+    uid:String,
+    email:String,
     userDescribe:String,
     tel:String,
     gender:Number,
     age:Number,
     address:String,
-    coin:Number,
+    coin:{type:Number,default:0},
     avatar:String,
-    asked:[],
+    asked: [Schema.Types.ObjectId],
     answered:[{id:String,myOption:Number}],
 
 })
-
 module.exports = userSchema

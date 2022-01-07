@@ -18,8 +18,11 @@
   "homepage": "https://github.com/piksonGit/opnion-server#readme",
   "dependencies": {
     "@koa/router": "^10.1.1",
+    "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
     "koa-router": "^10.1.1",
+    "koa-statuscode-pikson": "^1.0.0",
     "koa2-cors": "^2.0.6",
     "mongoose": "^6.1.5"
   }

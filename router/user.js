@@ -1,39 +1,35 @@
 const Router = require('koa-router')
+const userSchema = require('../schema/user')
+const rescode = require("koa-statuscode-pikson")
+module.exports = (Model) => {
+  const router = new Router()
+  router.post("/register",async(ctx) => {
+    //邮箱要唯一
+    let user = new Model(ctx.request.body)
+    user.save()
+    console.log(ctx.request.body)
+    ctx.body = ctx.request.body
 
-const mongoose = require("mongoose")
-const userSchema = require("../Schema/user")
+  })
+  router.post("/login",async(ctx) => {
+    let {email,password} = ctx.request.body
 
-main().catch(err => console.log(err))
+    if (!email || !password) {
+      ctx.body = rescode("lackOfParameters")
+      return 
 
-async function main(){
-    await mongoose.connect('mongodb://localhost:27017/test')
-    const User = mongoose.model('users',userSchema)
-    const user = new User({username:'bokeh'})
-    await user.save()
+    }
+    let sign = await Model.countDocuments({email,password})
+    if (sign) {
+      //jwt
+      
+      ctx.body = rescode("success")
+    } else {
+      ctx.body = rescode("noPermission")
+
+    }
+  })
+
+  return router
+
 }
-
-const router = new Router()
-
-router.get("/",async (ctx) => {
-    console.log("查询用户列表")
-})
-    .get("/:id",async(ctx) => {
-        console.log("获取单个用户信息")
-    })
-
-    .post("/",async(ctx) => {
-        console.log("添加用户")
-    })
-    
-    .put("/:id",async(ctx) => {
-        console.log("修改单个用户信息")
-    })
-    .del("/:id", async(ctx) => {
-        console.log("删除单个用户信息")
-    })
-    .all("/users/:id",async(ctx) => {
-        console.log("所有请求都会走这个")
-    })
-
-
-    module.exports = router
