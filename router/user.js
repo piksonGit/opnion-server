@@ -5,7 +5,20 @@ var jwt = require("jsonwebtoken")
 const Secret = "zhangranran"
 const router = new Router()
 module.exports = (Model) => {
-  
+  router.post("/info",async(ctx)=> {
+    let _id = ctx.request.body._id
+    let userinfo = Model.findById(_id)
+    let obj = rescode("success")
+    obj["datas"] = userinfo
+    ctx.body = obj
+  })
+  router.post("/update",async(ctx)=> {
+    let id=ctx.request.body._id
+    let updateinfo = ctx.request.body
+    delete updateinfo[""]
+    await Model.updateOne({_id:id }, updateinfo);
+    ctx.body = rescode("successs")
+  })
   router.post("/register",async(ctx) => {
     //邮箱要唯一
     let user = new Model(ctx.request.body)
