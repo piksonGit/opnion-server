@@ -40,7 +40,7 @@ module.exports = (Model) => {
       //jwt
       userinfo = await Model.findOne({email,password})
       let userToken = {email:userinfo.email}
-      resObj = rescode("success")
+      let resObj = rescode("success")
       resobj["userinfo"] = userinfo
       resObj.token = jwt.sign(
         userToken,
