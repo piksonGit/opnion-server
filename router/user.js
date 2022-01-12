@@ -10,8 +10,8 @@ module.exports = (Model) => {
     //邮箱要唯一
     let user = new Model(ctx.request.body)
     user.save()
-    console.log(ctx.request.body)
-    ctx.body = ctx.request.body
+    
+    ctx.body = rescode("success")
 
   })
   router.post("/login",async(ctx) => {
