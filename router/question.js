@@ -26,7 +26,6 @@ module.exports = (Model) => {
         .post("/q/add", async (ctx) => {
             let data = ctx.request.body
             let question = new Model(data)
-            console.log(data)
             question.save()
             ctx.body = rescode("success")
         })
