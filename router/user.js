@@ -5,8 +5,8 @@ var jwt = require("jsonwebtoken")
 const Secret = "zhangranran"
 const router = new Router()
 module.exports = (Model) => {
-  router.post("/info",async(ctx)=> {
-    let _id = ctx.request.body._id
+  router.get("/info",async(ctx)=> {
+    let _id = ctx.query._id
     let userinfo = Model.findById(_id)
     let obj = rescode("success")
     obj["datas"] = userinfo
