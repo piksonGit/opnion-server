@@ -4,7 +4,8 @@ const config = require('./config')
 const koajwt = require('koa-jwt')
 const cors = require('koa2-cors');
 var Router = require('koa-router');
-const setuserinfo = require('./middleware/getuserinfo')
+const rescode = require("koa-statuscode-pikson")
+const setuserinfo = require('./middleware/setuserinfo')
 const loginauth = require('./middleware/loginauth')
 const adminRoute = require('./router/admin')
 const userRouter = require('./router/user')
@@ -29,24 +30,26 @@ const handler = async (ctx, next) => {
   } catch (err) {
     console.log(err)
     ctx.response.status = err.statusCode || err.status || 500;
-    ctx.response.body = {
+    ctx.status = 200
+    ctx.body = rescode("serverError")
+   /*  ctx.response.body = {
       message: err.message
-    };
+    }; */
   }
 }
 app.use(cors())
 app.use(bodyParser())
-router.use(loginauth)
-router.use(koajwt({ secret: config.secret }).unless({
+app.use(loginauth)
+app.use(koajwt({ secret: config.secret }).unless({
 path: ['/user/login', '/user/register','/question',/^\/question\/(\d|\w)*$/]
 }))
 
-router.use(handler)
-
+app.use(handler)
+router.use(setuserinfo)
 router.use("/admin",aRoute.routes(),aRoute.allowedMethods())
 router.use("/question",qRoute.routes(),qRoute.allowedMethods())
 router.use("/user",uRoute.routes(),uRoute.allowedMethods())
-router.use(setuserinfo)
+
 
 app.use(router.routes())
 

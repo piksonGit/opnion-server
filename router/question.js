@@ -24,6 +24,7 @@ module.exports = (Model) => {
         })
 
         .post("/q/add", async (ctx) => {
+            console.log(ctx.userinfo)
             let data = ctx.request.body
             let question = new Model(data)
             question.save()

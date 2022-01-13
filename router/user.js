@@ -33,11 +33,14 @@ module.exports = (Model) => {
       return 
 
     }
-    let sign = await Model.countDocuments({email,password})
+    let condition = {email,password}
+    console.log(condition)
+    let sign = await Model.countDocuments(condition)
+    console.log(sign)
     if (sign) {
-      //jwt
       userinfo = await Model.findOne({email,password})
-      let userToken = userinfo
+      let {_id,username} = userinfo
+      let userToken = {_id,username}
       let resObj = rescode("success")
       resObj["userinfo"] = userinfo
       resObj.token = jwt.sign(
