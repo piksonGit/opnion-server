@@ -7,7 +7,9 @@ module.exports = function(ctx, next) {
       ctx.status = 200
       ctx.body = rescode("noPermission")
     } else {
-      ctx.userinfo = jwt.verify(token,config.secret)
+      let token = ctx.header.authorization
+      let payload = token.split(' ')[1]
+      ctx.userinfo = jwt.verify(payload,config.secret)
     }
   })
 }
