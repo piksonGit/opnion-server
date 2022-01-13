@@ -1,8 +1,7 @@
 const Router = require('koa-router')
-const userSchema = require('../schema/user')
+const config = require('../config.js')
 const rescode = require("koa-statuscode-pikson")
 var jwt = require("jsonwebtoken")
-const Secret = "zhangranran"
 const router = new Router()
 module.exports = (Model) => {
   router.get("/info",async(ctx)=> {
@@ -13,10 +12,9 @@ module.exports = (Model) => {
     ctx.body = obj
   })
   router.post("/update",async(ctx)=> {
-    let id=ctx.request.body._id
+    let id = ctx.userinfo._id
     let updateinfo = ctx.request.body
-    delete updateinfo[""]
-    await Model.updateOne({_id:id }, updateinfo);
+    updateinfo["_id"] ? delete updateinfo["id"] : await Model.updateOne({ _id: id }, updateinfo);
     ctx.body = rescode("successs")
   })
   router.post("/register",async(ctx) => {
@@ -39,12 +37,12 @@ module.exports = (Model) => {
     if (sign) {
       //jwt
       userinfo = await Model.findOne({email,password})
-      let userToken = {email:userinfo.email}
+      let userToken = userinfo
       let resObj = rescode("success")
       resObj["userinfo"] = userinfo
       resObj.token = jwt.sign(
         userToken,
-        Secret,
+        config.secret,
         {expiresIn:'1h'},
 
       )
