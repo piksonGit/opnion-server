@@ -53,4 +53,4 @@ router.use("/user",uRoute.routes(),uRoute.allowedMethods())
 
 app.use(router.routes())
 
-app.listen(80)
+app.listen(3000)
