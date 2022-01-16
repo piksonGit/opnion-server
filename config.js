@@ -1,3 +1,4 @@
 module.exports = {
-  secret:"zhangranran"
+  secret:"zhangranran",
+  pageSize:20
 }

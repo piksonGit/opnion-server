@@ -1,13 +1,18 @@
 const Router = require('koa-router');
 const rescode = require("koa-statuscode-pikson")
+const config = require("../config")
 const router = new Router()
 
 
 module.exports = (Model) => {
     router.get("/", async (ctx) => {
+        let page = ctx.query.page
+        let limit = config.pageSize
+        
         let condition = ctx.query
-        ctx.body = condition
-        let datas = await Model.find(condition)
+        delete condition.page
+
+        let datas = await Model.find(condition).skip(page-1).limit(20)
         let obj = rescode('success')
         obj['datas'] = datas
         ctx.body = obj

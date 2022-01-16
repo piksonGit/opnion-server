@@ -21,6 +21,9 @@ const Question = mongoose.model('Question',questionSchema)
 let aRoute = adminRoute(User)
 let uRoute = userRouter(User)
 let qRoute = questionRouter(Question)
+const unlessArr = {
+  path: ['/user/login', '/user/register', '/question', /^\/question\/(\d|\w)*$/]
+}
 app.on('error', (err, ctx) =>
   console.error('server error', err)
 )
@@ -40,12 +43,11 @@ const handler = async (ctx, next) => {
 app.use(cors())
 app.use(bodyParser())
 app.use(loginauth)
-app.use(koajwt({ secret: config.secret }).unless({
-path: ['/user/login', '/user/register','/question',/^\/question\/(\d|\w)*$/]
-}))
+app.use(koajwt({ secret: config.secret }).unless(unlessArr))
+app.use(setuserinfo().unless(unlessArr))
 
 app.use(handler)
-router.use(setuserinfo)
+
 router.use("/admin",aRoute.routes(),aRoute.allowedMethods())
 router.use("/question",qRoute.routes(),qRoute.allowedMethods())
 router.use("/user",uRoute.routes(),uRoute.allowedMethods())
