@@ -6,9 +6,8 @@ const router = new Router()
 
 module.exports = (Model) => {
     router.get("/", async (ctx) => {
-        let page = ctx.query.page
+        let page = ctx.query.page?ctx.query.page:1
         let limit = config.pageSize
-        
         let condition = ctx.query
         delete condition.page
 
