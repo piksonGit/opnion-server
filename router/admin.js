@@ -22,8 +22,5 @@ module.exports = (Model) => {
         .del("/:id", async (ctx) => {
             console.log("删除单个用户信息")
         })
-        .all("/users/:id", async (ctx) => {
-            console.log("所有请求都会走这个")
-        })
         return router
 }

@@ -1,5 +1,7 @@
 const bodyParser = require("koa-bodyparser")
 const Koa = require('koa')
+const routerfinder = require('koa-router-finder')
+const fs = require('fs')
 const config = require('./config')
 const koajwt = require('koa-jwt')
 const cors = require('koa2-cors');
@@ -51,8 +53,6 @@ app.use(handler)
 router.use("/admin",aRoute.routes(),aRoute.allowedMethods())
 router.use("/question",qRoute.routes(),qRoute.allowedMethods())
 router.use("/user",uRoute.routes(),uRoute.allowedMethods())
-
-
+routerfinder(router)
 app.use(router.routes())
-
 app.listen(3000)

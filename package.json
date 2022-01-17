@@ -23,6 +23,7 @@
     "koa-bodyparser": "^4.3.0",
     "koa-jwt": "^4.0.3",
     "koa-router": "^10.1.1",
+    "koa-router-finder": "^1.0.0",
     "koa-statuscode-pikson": "^1.0.0",
     "koa2-cors": "^2.0.6",
     "mongoose": "^6.1.5"

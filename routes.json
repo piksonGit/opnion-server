@@ -1,0 +1,120 @@
+[
+	{
+		"path": "/admin",
+		"parameters": {},
+		"methods": [
+			"HEAD",
+			"GET"
+		]
+	},
+	{
+		"path": "/admin/:id",
+		"parameters": {},
+		"methods": [
+			"HEAD",
+			"GET"
+		]
+	},
+	{
+		"path": "/admin",
+		"parameters": {},
+		"methods": [
+			"POST"
+		]
+	},
+	{
+		"path": "/admin/:id",
+		"parameters": {},
+		"methods": [
+			"PUT"
+		]
+	},
+	{
+		"path": "/admin/:id",
+		"parameters": {},
+		"methods": [
+			"DELETE"
+		]
+	},
+	{
+		"path": "/admin",
+		"parameters": {},
+		"methods": []
+	},
+	{
+		"path": "/question",
+		"parameters": {},
+		"methods": [
+			"HEAD",
+			"GET"
+		]
+	},
+	{
+		"path": "/question/:id",
+		"parameters": {},
+		"methods": [
+			"HEAD",
+			"GET"
+		]
+	},
+	{
+		"path": "/question/q/add",
+		"parameters": {},
+		"methods": [
+			"POST"
+		]
+	},
+	{
+		"path": "/question/q/:id",
+		"parameters": {},
+		"methods": [
+			"PUT"
+		]
+	},
+	{
+		"path": "/question/q/:id",
+		"parameters": {},
+		"methods": [
+			"DELETE"
+		]
+	},
+	{
+		"path": "/question",
+		"parameters": {},
+		"methods": []
+	},
+	{
+		"path": "/user/info",
+		"parameters": {},
+		"methods": [
+			"HEAD",
+			"GET"
+		]
+	},
+	{
+		"path": "/user/update",
+		"parameters": {},
+		"methods": [
+			"POST"
+		]
+	},
+	{
+		"path": "/user/register",
+		"parameters": {},
+		"methods": [
+			"POST"
+		]
+	},
+	{
+		"path": "/user/login",
+		"parameters": {},
+		"methods": [
+			"POST"
+		]
+	},
+	{
+		"path": "/user",
+		"parameters": {},
+		"methods": []
+	}
+]

@@ -10,8 +10,7 @@ module.exports = (Model) => {
         let limit = config.pageSize
         let condition = ctx.query
         delete condition.page
-
-        let datas = await Model.find(condition).skip(page-1).limit(20)
+        let datas = await Model.find(condition).skip(page-1).limit(limit)
         let obj = rescode('success')
         obj['datas'] = datas
         ctx.body = obj
@@ -42,9 +41,6 @@ module.exports = (Model) => {
         })
         .del("/q/:id", async (ctx) => {
             console.log("删除单个问题信息")
-        })
-        .all("/users/:id", async (ctx) => {
-            console.log("所有请求都会走这个")
         })
         return router
 }
