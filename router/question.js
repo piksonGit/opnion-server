@@ -36,6 +36,7 @@ module.exports = (Model) => {
             })
             let img = data["image"]
             let imgarr = []
+            console.log(data)
             console.log(img)
             console.log(typeof img)
             for (let i in img) {
