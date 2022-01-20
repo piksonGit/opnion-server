@@ -29,7 +29,7 @@ module.exports = (Model) => {
         .post("/q/add", async (ctx) => {
             console.log(ctx.userinfo)
             let data = ctx.request.body
-            data["ownerId"] = userinfo._id
+            data["answerOptions"] = data["answerOptions"].map(value =>{name:value})
             let question = new Model(data)
             question.save()
             ctx.body = rescode("success")

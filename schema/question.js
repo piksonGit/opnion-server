@@ -10,6 +10,6 @@ const questionSchema = new Schema({
   status:{type:String,default:"ready"},//ready,publish,reject.
   image:[String],
   ownerId:String,
-  answerOptions:[{name:String,value:Number,count:{type:Number,default:0}}],
+  answerOptions:[{name:String,count:{type:Number,default:0}}],
 })
 module.exports = questionSchema
