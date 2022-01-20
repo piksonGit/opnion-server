@@ -36,6 +36,8 @@ module.exports = (Model) => {
             })
             let img = data["image"]
             let imgarr = []
+            console.log(img)
+            console.log(typeof img)
             for (let i in img) {
                 let base64data = img[i].replace(/^data:image\/\w+;base64,/, "")
                 let dataBuffer = new Buffer(base64data,'base64')
