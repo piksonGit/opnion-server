@@ -19,6 +19,7 @@ module.exports = (Model) => {
   })
   router.post("/register",async(ctx) => {
     //邮箱要唯一
+    
     let user = new Model(ctx.request.body)
     user.save()
     
