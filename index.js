@@ -43,7 +43,11 @@ const handler = async (ctx, next) => {
   }
 }
 app.use(cors())
-app.use(bodyParser())
+app.use(bodyParser({
+  formLimit:"100mb",
+  jsonLimit:"100mb",
+  textLimit:"100mb",
+}))
 app.use(loginauth)
 app.use(koajwt({ secret: config.secret }).unless(unlessArr))
 app.use(setuserinfo().unless(unlessArr))
