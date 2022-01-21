@@ -3,7 +3,8 @@ const rescode = require("koa-statuscode-pikson")
 const config = require("../config")
 const fs = require("fs")
 const router = new Router()
-import { v1 as uuidv1 } from 'uuid'
+const uuid = require('uuid')
+
 
 
 module.exports = (Model) => {
@@ -38,7 +39,7 @@ module.exports = (Model) => {
             let img = data["image"]
             let imgarr = []
             //需要创建唯一标识
-            let uuid = uuidv1()
+            let uuid = uuid.v1()
 
             for (let i in img) {
                 let base64data = img[i].replace(/^data:image\/\w+;base64,/, "")
