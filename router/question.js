@@ -15,6 +15,7 @@ module.exports = (Model) => {
         const answer = ctx.query.answer
         const answerIndex = typeof ctx.query.index == 'string'?parseInt(ctx.query.index):ctx.query.index
         console.log(ctx.userinfo)
+        console.log(typeof answerIndex, answerIndex)
         let questionId = ctx.params.questionId
         let userId = ctx.userinfo._id
         let qu = {userId,questionId}
