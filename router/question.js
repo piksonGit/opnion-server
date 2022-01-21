@@ -26,7 +26,7 @@ module.exports = (Model) => {
             obj.desc = "you have voted"
             ctx.body = obj
         } else {
-            const res = await model.updateOne({ _id: questionId }, { $inc: { "answerOptions.count": 1 } })
+            const res = await Model.updateOne({ _id: questionId }, { $inc: { "answerOptions.count": 1 } })
             let vote = new Vote({
                 userId,
                 questionId,
