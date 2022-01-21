@@ -27,18 +27,23 @@ module.exports = (Model) => {
             obj.desc = "you have voted"
             ctx.body = obj
         } else {
-            //const res = await Model.updateOne({ _id: questionId }, { $inc: { "answerOptions.count": 1 } })
-            Model.findById(questionId,function(err, question) {
-                question.answerOptions[answerIndex].count +=1
-                question.save()
-            })
             let vote = new Vote({
                 userId,
                 questionId,
                 answer,
                 answerIndex,
             })
-            vote.save()
+            //const res = await Model.updateOne({ _id: questionId }, { $inc: { "answerOptions.count": 1 } })
+            if (!answerIndex || typeof answerIndex !=' number') {
+                ctx.body = rescode("lackOfParamaters")
+                return 
+            }
+            Model.findById(questionId,function(err, question) {
+                question.answerOptions[answerIndex].count +=1
+                question.save()
+                vote.save()
+
+            })
             ctx.body = rescode('success')
             
         }
