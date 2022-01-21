@@ -19,6 +19,7 @@ module.exports = (Model) => {
         let qu = {userId,questionId}
         //判断是不是已经投过票
         const ifVoted = Vote.countDocuments(qu)
+        console.log(ifVoted)
         if (ifVoted) {
             //如果投票了就告诉他不能投了
             let obj = rescode('alreadyExists')
