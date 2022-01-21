@@ -13,7 +13,7 @@ module.exports = (Model) => {
     router.get("/q/vote/:questionId", async (ctx)=>{
         //额外一张表 {questionId,userId,answered答案，}
         const answer = ctx.query.answer
-        const answerIndex = ctx.query.index
+        const answerIndex = typeof ctx.query.index == 'string'?parseInt(ctx.query.index):ctx.query.index
         console.log(ctx.userinfo)
         let questionId = ctx.params.questionId
         let userId = ctx.userinfo._id
@@ -35,7 +35,7 @@ module.exports = (Model) => {
             })
             //const res = await Model.updateOne({ _id: questionId }, { $inc: { "answerOptions.count": 1 } })
             if (!answerIndex || typeof answerIndex !=' number') {
-                ctx.body = rescode("lackOfParamaters")
+                ctx.body = rescode("lackOfParameters")
                 return 
             }
             Model.findById(questionId,function(err, question) {
