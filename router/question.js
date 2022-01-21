@@ -33,10 +33,8 @@ module.exports = (Model) => {
                 answerIndex,
             })
             //const res = await Model.updateOne({ _id: questionId }, { $inc: { "answerOptions.count": 1 } })
-            if (typeof answerIndex !=' number') {
                 ctx.body = rescode("lackOfParameters")
                 return 
-            }
             Model.findById(questionId,function(err, question) {
                 question.answerOptions[answerIndex].count +=1
                 question.save()
