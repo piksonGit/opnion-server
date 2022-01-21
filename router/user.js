@@ -1,6 +1,7 @@
 const Router = require('koa-router')
 const config = require('../config.js')
 const rescode = require("koa-statuscode-pikson")
+
 var jwt = require("jsonwebtoken")
 const router = new Router()
 module.exports = (Model) => {
