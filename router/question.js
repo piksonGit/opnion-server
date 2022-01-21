@@ -36,6 +36,7 @@ module.exports = (Model) => {
                 userId,
                 questionId,
                 answer,
+                answerIndex,
             })
             vote.save()
             ctx.body = rescode('success')
