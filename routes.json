@@ -42,6 +42,14 @@
 		"methods": []
 	},
 	{
+		"path": "/question/q/vote/:questionId",
+		"parameters": {},
+		"methods": [
+			"HEAD",
+			"GET"
+		]
+	},
+	{
 		"path": "/question",
 		"parameters": {},
 		"methods": [

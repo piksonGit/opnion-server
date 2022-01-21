@@ -13,6 +13,7 @@ const adminRoute = require('./router/admin')
 const userRouter = require('./router/user')
 const questionRouter = require("./router/question")
 const userSchema = require('./schema/user')
+
 const questionSchema = require('./schema/question')
 const mongoose = require("mongoose")
 const app = new Koa()
@@ -20,6 +21,7 @@ const router = new Router();
 mongoose.connect('mongodb://localhost:27017/test')
 const User = mongoose.model('User', userSchema)
 const Question = mongoose.model('Question',questionSchema)
+
 let aRoute = adminRoute(User)
 let uRoute = userRouter(User)
 let qRoute = questionRouter(Question)

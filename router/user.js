@@ -36,9 +36,7 @@ module.exports = (Model) => {
 
     }
     let condition = {email,password}
-    console.log(condition)
     let sign = await Model.countDocuments(condition)
-    console.log(sign)
     if (sign) {
       userinfo = await Model.findOne({email,password})
       let {_id,username} = userinfo

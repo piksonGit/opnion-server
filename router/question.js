@@ -4,10 +4,39 @@ const config = require("../config")
 const fs = require("fs")
 const router = new Router()
 const uuid = require('uuid')
-
+const mongoose = require('mongoose')
+const voteSchema = require('../schema/vote')
+const Vote = mongoose.model('Vote', voteSchema)
 
 
 module.exports = (Model) => {
+    router.get("/q/vote/:questionId", async (ctx)=>{
+        //额外一张表 {questionId,userId,answered答案，}
+        const answer = ctx.query.answer
+        console.log(ctx.userinfo)
+        let questionId = ctx.params.questionId
+        let userId = ctx.userinfo._id
+        let qu = {userId,questionId}
+        //判断是不是已经投过票
+        const ifVoted = Vote.countDocuments(qu)
+        if (ifVoted) {
+            //如果投票了就告诉他不能投了
+            let obj = rescode('alreadyExists')
+            obj.desc = "you have voted"
+            ctx.body = obj
+        } else {
+            const res = await model.updateOne({ _id: questionId }, { $inc: { "answerOptions.count": 1 } })
+            let vote = new Vote({
+                userId,
+                questionId,
+                answer,
+            })
+            vote.save()
+            ctx.body = rescode('success')
+            
+        }
+        
+    });
     router.get("/", async (ctx) => {
         let page = ctx.query.page?ctx.query.page:1
         let limit = config.pageSize
