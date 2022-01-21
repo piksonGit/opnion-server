@@ -14,8 +14,6 @@ module.exports = (Model) => {
         //额外一张表 {questionId,userId,answered答案，}
         const answer = ctx.query.answer
         const answerIndex = typeof ctx.query.index == 'string'?parseInt(ctx.query.index):ctx.query.index
-        console.log(ctx.userinfo)
-        console.log(typeof answerIndex, answerIndex)
         let questionId = ctx.params.questionId
         let userId = ctx.userinfo._id
         let qu = {userId,questionId}
@@ -35,7 +33,7 @@ module.exports = (Model) => {
                 answerIndex,
             })
             //const res = await Model.updateOne({ _id: questionId }, { $inc: { "answerOptions.count": 1 } })
-            if (!answerIndex || typeof answerIndex !=' number') {
+            if (typeof answerIndex !=' number') {
                 ctx.body = rescode("lackOfParameters")
                 return 
             }
