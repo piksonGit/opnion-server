@@ -13,6 +13,7 @@ module.exports = (Model) => {
     router.get("/q/vote/:questionId", async (ctx)=>{
         //额外一张表 {questionId,userId,answered答案，}
         const answer = ctx.query.answer
+        const answerIndex = ctx.query.index
         console.log(ctx.userinfo)
         let questionId = ctx.params.questionId
         let userId = ctx.userinfo._id
@@ -26,7 +27,11 @@ module.exports = (Model) => {
             obj.desc = "you have voted"
             ctx.body = obj
         } else {
-            const res = await Model.updateOne({ _id: questionId }, { $inc: { "answerOptions.count": 1 } })
+            //const res = await Model.updateOne({ _id: questionId }, { $inc: { "answerOptions.count": 1 } })
+            Model.findById(questionId,function(err, question) {
+                question.answerOptions[answerIndex].count +=1
+                question.save()
+            })
             let vote = new Vote({
                 userId,
                 questionId,
